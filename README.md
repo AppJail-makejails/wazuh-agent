@@ -69,7 +69,7 @@ pass out quick on wazuh-net inet proto { tcp udp } from 10.0.0.3 to any
 Create a container named `agent01` with a private IP address `10.0.0.3`. Take on mind that the IP address must be part of `wazuh-net` network.
 
 ```console
-# appjail makejail -f gh+AppJail-makejails/wazuh-agent -j agent01 -- --network wazuh-net --agent_ip 10.0.0.3 --agent_name agent01 --server_ip 10.0.0.2
+# appjail makejail -f gh+AppJail-makejails/wazuh-agent -j agent01 -- --network wazuh-net --agent_ip 10.0.0.3 --agent_name agent01 --server_ip 10.0.0.2 --enrollment managerpasswordenrollment
 ```
 
 When it is done, `agent01` (`10.0.0.3`) will try connect to wazuh-manager (`10.0.0.2`) for auth process. Both are in the `wazuh-net` virtualnet.
