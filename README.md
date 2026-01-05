@@ -22,6 +22,7 @@ options:
 services:
   wazuh-agent:
     name: wazuh-agent
+    makejail: gh+AppJail-makejails/wazuh-agent
     environment:
       - WAZUH_MANAGER_SERVER: '10.0.0.80'
       - WAZUH_REGISTRATION_PASSWORD: 'fhlc0egBAfx0vZMWoJig4bhZjPgxG8tKEM0yTBfd50Q'
