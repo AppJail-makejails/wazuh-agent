@@ -1,34 +1,14 @@
-INCLUDE options/options.makejail
+OPTION start
+OPTION overwrite=force
 
-ARG agent_ip=10.0.0.3
-ARG agent_name=agent01
-ARG server_ip=10.0.0.2
-ARG network=wazuh-net
-ARG enrollment
+PKG wazuh-agent gsed
 
-CMD sed -e "s|quarterly|latest|g" -i.bak /etc/pkg/FreeBSD.conf
+# Workaround: wazuh-agentd: ERROR: (1103): Could not open file 'etc/client.keys' due to [(13)-(Permission denied)].
+CMD chown wazuh:wazuh /var/ossec/etc/client.keys
 
-PKG bash wazuh-agent
+COPY scripts
 
-CMD cp /etc/localtime /var/ossec/etc
-CMD touch /var/ossec/logs/active-responses.log
-CMD chmod 740 /var/ossec/logs/active-responses.log
-CMD touch /var/log/syslog
-CMD chmod 740 /var/log/syslog
-
-COPY files/var/ossec/etc/ossec.conf /var/ossec/etc
-
-REPLACE /var/ossec/etc/ossec.conf SERVER_IP ${server_ip}
-
-CMD chmod 660 /var/ossec/etc/ossec.conf
-CMD chown root:wazuh /var/ossec/etc/ossec.conf
-
-CMD touch /var/ossec/etc/authd.pass
-CMD chmod 640 /var/ossec/etc/authd.pass
-CMD chown root:wazuh /var/ossec/etc/authd.pass
-
-CMD echo ${enrollment} > /var/ossec/etc/authd.pass
+RUN /scripts/init.sh
 
 SYSRC wazuh_agent_enable=YES
-
 SERVICE wazuh-agent start
