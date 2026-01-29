@@ -58,7 +58,7 @@ FreeBSD-kmods: {
     <server>
       <address>CHANGE_MANAGER_IP</address>
       <port>1514</port>
-      <protocol>udp</protocol>
+      <protocol>tcp</protocol>
     </server>
     <config-profile>freebsd, freebsd15</config-profile>
     <crypto_method>aes</crypto_method>
