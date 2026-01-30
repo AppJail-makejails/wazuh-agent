@@ -60,7 +60,7 @@ FreeBSD-kmods: {
       <port>1514</port>
       <protocol>tcp</protocol>
     </server>
-    <config-profile>freebsd, freebsd15</config-profile>
+    <config-profile>freebsd, freebsd14</config-profile>
     <crypto_method>aes</crypto_method>
       <enrollment>
         <agent_name>CHANGE_AGENT_NAME</agent_name>
